@@ -1,0 +1,26 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}Feedback Sent - WhisperLink{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="text-center">
+            <div class="success-icon mb-4">
+                <i class="fas fa-check-circle fa-5x text-success"></i>
+            </div>
+            <h2 class="text-success mb-3">Feedback Sent Successfully!</h2>
+            <p class="lead">Your anonymous feedback has been delivered.</p>
+            <p class="text-muted">
+                The recipient will see your feedback in their dashboard, but they won't know who sent it.
+            </p>
+            
+            <div class="mt-4">
+                <a href="{% url 'home' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

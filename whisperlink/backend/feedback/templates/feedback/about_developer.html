@@ -1,0 +1,106 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}About Developer - WhisperLink{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="developer-hero text-center mb-5">
+            <h1 class="gradient-text mb-4">
+                <i class="fas fa-code"></i> Meet the Developer
+            </h1>
+            <p class="lead">The passionate developer behind WhisperLink</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card developer-card text-center">
+                    <div class="card-body">
+                        <div class="developer-photo mb-5">
+                            <img src="https://res.cloudinary.com/dqvsjtkqw/image/upload/v1752050555/WhatsApp_Image_2024-06-16_at_00.57.23_a2952eba_1_pokuj5.jpg" 
+                                 alt="Bro Cascallen" 
+                                 class=" img-fluid developer-image">
+                        </div>
+                        <h3 class="gradient-text">Bro Cascallen_Full Stack Developer</h3>
+                        <p class="text-muted mb-3">Founder of Technova Brocoder</p>
+                        <div class="contact-info">
+                            <a href="tel:+254793515066" class="btn btn-outline-primary btn-sm mb-2">
+                                <i class="fas fa-phone"></i> +254 793 515 066
+                            </a>
+                            <br>
+                            <a href="https://wa.me/254793515066" class="btn btn-success btn-sm" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card developer-info">
+                    <div class="card-body">
+                        <h4 class="gradient-text mb-3">
+                            <i class="fas fa-user"></i> About Me
+                        </h4>
+                        <p>
+                            I'm a passionate full-stack developer with expertise in modern web technologies. 
+                            I created WhisperLink to help people build self-awareness through honest, 
+                            anonymous feedback from their peers.
+                        </p>
+                        
+                        <h5 class="gradient-text mt-4 mb-3">
+                            <i class="fas fa-briefcase"></i> My Role
+                        </h5>
+                        <p>As the Founder of Technova Brocoder, I lead innovative technology solutions and product development. I created WhisperLink as part of our mission to build meaningful digital experiences that foster authentic human connections.</p>
+
+                        <h5 class="gradient-text mt-4 mb-3">
+                       
+                        </h5>
+                        <div class="features-grid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card glass-card">
+                    <div class="card-body text-center">
+                        <h4 class="gradient-text mb-3">
+                            <i class="fas fa-handshake"></i> Let's Connect
+                        </h4>
+                        <p class="text-muted mb-4">
+                            Interested in working together or have questions about WhisperLink? 
+                            I'd love to hear from you!
+                        </p>
+                        <div class="contact-buttons">
+                            <a href="tel:+254793515066" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-phone"></i> Call Me
+                            </a>
+                            <a href="https://wa.me/254793515066?text=Hi%20Bro%20Cascallen!%20I%20found%20your%20WhisperLink%20platform%20amazing!" 
+                               class="btn btn-success btn-lg" target="_blank" rel="noopener">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}Dashboard - WhisperLink{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-tachometer-alt"></i> Your Dashboard</h2>
+            <a href="{% url 'profile_settings' %}" class="btn btn-outline-primary">
+                <i class="fas fa-user-cog"></i> Settings
+            </a>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-share-alt"></i> Your Feedback Link
+                        </h5>
+                        <p class="card-text">Share this link to receive anonymous feedback:</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="feedbackLink" value="{{ feedback_link }}" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyLink()">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <small class="text-muted">Anyone with this link can send you anonymous feedback.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-bar"></i> Stats
+                        </h5>
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <h3 class="text-primary">{{ feedback_list.count }}</h3>
+                                <p class="mb-0">Total Feedback</p>
+                            </div>
+                            <div class="col-6">
+                                <h3 class="text-success">{{ feedback_list.count|floatformat:0 }}</h3>
+                                <p class="mb-0">This Month</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-comments"></i> Recent Feedback
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if feedback_list %}
+                    {% for feedback in feedback_list %}
+                        <div class="feedback-item">
+                            <div class="feedback-message">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <p class="mb-0 flex-grow-1">{{ feedback.message }}</p>
+                                    <div class="d-flex align-items-center gap-2">
+                                        {% if feedback.is_ai_generated %}
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-robot"></i> AI Enhanced
+                                            </span>
+                                        {% endif %}
+                                        <a href="{% url 'delete_received_feedback' feedback.id %}" 
+                                           class="btn btn-outline-danger btn-sm" 
+                                           title="Delete this feedback">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock"></i> {{ feedback.submitted_at|date:"F j, Y, g:i a" }}
+                                    </small>
+                                    {% if feedback.is_ai_generated and feedback.original_input %}
+                                        <small class="text-muted">
+                                            <button class="btn btn-link btn-sm p-0 text-muted" 
+                                                    onclick="toggleOriginal({{ feedback.id }})" 
+                                                    title="Show original input">
+                                                <i class="fas fa-eye"></i> Show Original
+                                            </button>
+                                        </small>
+                                    {% endif %}
+                                </div>
+                                {% if feedback.is_ai_generated and feedback.original_input %}
+                                    <div id="original-{{ feedback.id }}" class="mt-2 p-2 bg-light rounded small" style="display: none;">
+                                        <strong>Original input:</strong> {{ feedback.original_input }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if not forloop.last %}
+                            <hr style="border-color: rgba(30, 58, 138, 0.1);">
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <h5>No feedback yet</h5>
+                        <p class="text-muted">Share your link to start receiving anonymous feedback!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyLink() {
+    const linkInput = document.getElementById('feedbackLink');
+    linkInput.select();
+    linkInput.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    
+    const button = document.querySelector('button[onclick="copyLink()"]');
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    button.classList.remove('btn-outline-secondary');
+    button.classList.add('btn-success');
+    
+    setTimeout(() => {
+        button.innerHTML = originalText;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-secondary');
+    }, 2000);
+}
+
+function toggleOriginal(feedbackId) {
+    const originalDiv = document.getElementById('original-' + feedbackId);
+    const button = document.querySelector(`button[onclick="toggleOriginal(${feedbackId})"]`);
+    
+    if (originalDiv.style.display === 'none') {
+        originalDiv.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Original';
+    } else {
+        originalDiv.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-eye"></i> Show Original';
+    }
+}
+</script>
+{% endblock %}

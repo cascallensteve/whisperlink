@@ -1,0 +1,117 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}WhisperLink - Anonymous Feedback Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-11">
+        <div class="hero-section text-center mb-5">
+            <div class="floating">
+                <i class="fas fa-comment-dots fa-4x mb-4" style="color: rgba(255,255,255,0.9);"></i>
+            </div>
+            <h1 class="display-3 mb-4">
+                <span class="gradient-text">WhisperLink</span>
+            </h1>
+            <p class="lead mb-4">Discover your true impact through honest, anonymous feedback</p>
+            <p class="mb-5" style="font-size: 1.1rem; opacity: 0.9;">
+                Build self-awareness, foster growth, and understand how others really perceive you
+            </p>
+            <div class="mt-4">
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg btn-glow me-3 animate-fadeInUp">
+                        <i class="fas fa-rocket"></i> Start Your Journey
+                    </a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg animate-fadeInUp animate-delay-100">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </a>
+                {% else %}
+                    <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg btn-glow animate-fadeInUp">
+                        <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row home-features">
+            <div class="col-md-4">
+                <div class="card feature-card h-100 animate-fadeInUp">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-secret fa-3x mb-3" style="color: var(--primary-color);"></i>
+                        <h5 class="card-title">Complete Anonymity</h5>
+                        <p class="card-text">People can share their honest thoughts without revealing their identity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card h-100 animate-fadeInUp animate-delay-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-robot fa-3x mb-3" style="color: var(--success-color);"></i>
+                        <h5 class="card-title">AI-Enhanced Feedback</h5>
+                        <p class="card-text">Get professional, constructive feedback with AI assistance for better communication.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card h-100 animate-fadeInUp animate-delay-200">
+                    <div class="card-body text-center">
+                        <i class="fab fa-whatsapp fa-3x mb-3" style="color: #25d366;"></i>
+                        <h5 class="card-title">WhatsApp Integration</h5>
+                        <p class="card-text">Share your feedback link directly via WhatsApp for easy access and communication.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center">
+            <h3 class="gradient-text mb-4">How it works</h3>
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="step-item animate-fadeInUp">
+                        <div class="step-number">1</div>
+                        <h5>Sign Up</h5>
+                        <p>Create your free account</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-item animate-fadeInUp animate-delay-100">
+                        <div class="step-number">2</div>
+                        <h5>Share Link</h5>
+                        <p>Share your unique link with others</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-item animate-fadeInUp animate-delay-200">
+                        <div class="step-number">3</div>
+                        <h5>Receive Feedback</h5>
+                        <p>Get anonymous thoughts and opinions</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-item animate-fadeInUp animate-delay-300">
+                        <div class="step-number">4</div>
+                        <h5>Reflect & Grow</h5>
+                        <p>Build self-awareness and improve</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-5 text-center">
+            <div class="glass-card p-4 mx-auto" style="max-width: 500px;">
+                <h4 class="gradient-text mb-3">
+                    <i class="fas fa-code"></i> Crafted with Excellence
+                </h4>
+                <p class="text-muted mb-2">
+                    Built with modern web technologies and attention to detail
+                </p>
+                <div class="developer-attribution">
+                    <span class="text-muted">
+                        Made with <i class="fas fa-heart text-danger pulse-animation"></i> 
+                        and passion by <span class="gradient-text">Bro Cascallen</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
